@@ -21,7 +21,7 @@ async function run() {
   try {
     await client.connect();
 
-    const database = client.db("assignment-12");
+    const database = client.db("TravelStar-Go");
     const servicesCollection = database.collection("services");
     const userBlogsCollection = database.collection("userBlogs");
     const usersCollection = database.collection("users");
@@ -43,6 +43,11 @@ async function run() {
 
       res.send({ result, count });
     });
+    // app.get("/services", async (req, res) => {
+    //   const cursor = servicesCollection.find({});
+    //   const reviews = await cursor.toArray();
+    //   res.json(reviews);
+    // });
     app.put("/confirmation/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: ObjectId(id) };
@@ -79,7 +84,7 @@ async function run() {
     // })
     app.get("/users/:email", async (req, res) => {
       const email = req.params.email;
-      const query = { email: email, photoURL };
+      const query = { email: email };
       const user = await usersCollection.findOne(query);
       // console.log(user);
       let isAdmin;
@@ -101,7 +106,7 @@ async function run() {
     });
     app.put("/users", async (req, res) => {
       const user = req.body;
-      const filter = { email: user.email, photoURL };
+      const filter = { email: user.email };
       const options = { upsert: true };
       const updateDoc = { $set: user };
       const result = await usersCollection.updateOne(
