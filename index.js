@@ -8,7 +8,8 @@ const port = process.env.PORT || 5000;
 
 // const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
 
-app.use(cors());
+app.use(cors({ origin: "*" }));
+
 app.use(express.json());
 
 const uri = `mongodb+srv://TravelStar-Go:TravelStar-Go**@cluster0.gribm.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
